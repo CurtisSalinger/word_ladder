@@ -59,19 +59,19 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
 	for word in entire:
 		words.append(word[:-1])
 	while len(q) > 0:
-		print('into loop')
+		#print('into loop')
 		op = q.popleft()
 		#print('op = ' , op)
 		for word in words:
 			if _adjacent(word,op[-1]):
 				#print('word = ', word, 'op[-1] = ', op[-1])
-				print('checked adjacent')
+				#print('checked adjacent')
 				op.append(word)
 				if end ==  word:
 					return op
 					#break
 				new = copy.deepcopy(op)
-				print('new = ', new)
+				#print('new = ', new)
 				q.append(new)
 				words.remove(word)
 
