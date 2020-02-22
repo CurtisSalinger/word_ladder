@@ -85,7 +85,7 @@ def verify_word_ladder(ladder):
 	for i in range(len(ladder) - 1):
 		if not  _adjacent(ladder[i],ladder[i+1]):
 			return False
-
+	return True
 def _adjacent(word1, word2):
 	'''
 	Returns True if the input words differ by only a single character;
