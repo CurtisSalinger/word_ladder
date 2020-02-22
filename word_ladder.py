@@ -50,20 +50,30 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
 	start = start_word
 	end = end_word
 	ladder = []
-	q = deque([])
+	q = deque()
 	ladder.append(start)
 	q.append(ladder)
+	words = []
 	with open(dictionary_file) as dtc:
-		words = dtc.readlines()
-		while q != []:
-			for word in words:
-				if _adjacent(word,ladder[-1]):
-					if word == end:
-						ladder.append(word)
-						return ladder
-					new = copy.copy(ladder)
-					q.append(new)
-					words.remove(word)
+		entire = dtc.readlines()
+	for word in entire:
+		words.append(word[:-1])
+	while len(q) > 0:
+		print('into loop')
+		op = q.popleft()
+		#print('op = ' , op)
+		for word in words:
+			if _adjacent(word,op[-1]):
+				#print('word = ', word, 'op[-1] = ', op[-1])
+				print('checked adjacent')
+				op.append(word)
+				if end ==  word:
+					return op
+					#break
+				new = copy.deepcopy(op)
+				print('new = ', new)
+				q.append(new)
+				words.remove(word)
 
 
 
