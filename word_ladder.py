@@ -57,23 +57,25 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
 	with open(dictionary_file) as dtc:
 		entire = dtc.readlines()
 	for word in entire:
-		words.append(word[:-2])
-	while len(q) > 0:
+		words.append(word[:-1])
+	#print('words = ', words)
+	while len(q) != 0:
 		#print('into loop')
-		op = q.popleft()
+		op = q.pop()
 		#print('op = ' , op)
 		for word in words:
 			if _adjacent(word,op[-1]):
 				#print('word = ', word, 'op[-1] = ', op[-1])
 				#print('checked adjacent')
-				op.append(word)
 				if end ==  word:
 					#print('done')
+					op.append(word)
 					return op
-					#break
+					#break				
 				new = copy.deepcopy(op)
+				op.append(word)
 				#print('new = ', new)
-				q.append(new)
+				q.appendleft(new)
 				words.remove(word)
 
 
@@ -83,7 +85,9 @@ def verify_word_ladder(ladder):
 	Returns True if each entry of the input list is adjacent to its neighbors;
 	otherwise returns False.
 	'''
-	for i in range(len(ladder) - 1):
+	if len(ladder) == 0:
+		return False
+	for i in range(len(ladder)-1):
 		if not  _adjacent(ladder[i],ladder[i+1]):
 			return False
 	return True
