@@ -54,7 +54,8 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
 	ladder.append(start)
 	q.append(ladder)
 	words = []
-	rmv = []
+	if end == start:
+		return ladder
 	with open(dictionary_file) as dtc:
 		entire = dtc.readlines()
 	for word in entire:
@@ -105,6 +106,8 @@ def _adjacent(word1, word2):
 	'''
 	count = 0
 	#print('word length = ',len(word1))
+	if len(word1) != len(word2):
+		return False
 	for i in range(len(word1)):
 		#print('word1[i]= ', word1[i], ' word2[i] = ',word2[i])
 		if word1[i] != word2[i]:
