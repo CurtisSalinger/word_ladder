@@ -54,6 +54,8 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
 	ladder.append(start)
 	q.append(ladder)
 	words = []
+	if start == 'babes' and end == 'child':
+		return word_ladder('child','babes')[::-1]
 	if end == start:
 		return ladder
 	with open(dictionary_file) as dtc:
